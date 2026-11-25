@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meet the Creator</title>
+
+    <link rel="stylesheet" href="./creator.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="./creator.bg.mp4" type="video/mp4">
+    </video>
+
+    <div class="background-overlay"></div>
+
+    <main class="creator-container">
+
+        <header class="creator-header">
+            <h1>MEET THY CREATOR !!</h1>
+            <p>"It was a terrifying sign but sounded like a neat adventure!"</p>
+        </header>
+
+        <section class="gallery">
+
+            <img id="gallery-image" class="gallery-image" src="./creator1.png" alt="Creator gallery image">
+
+            <button class="gallery-button previous" onclick="changeImage(-1)">&#10094;</button>
+
+            <button class="gallery-button next" onclick="changeImage(1)">&#10095;</button>
+
+        </section>
+
+        <div class="image-info">
+            <h2 id="image-title">Who Am I?</h2>
+            <p id="image-description">A brief summary of the kind of person I am, the surface of my goals, and what I like to do for fun.</p>
+        </div>
+
+        <div class="image-counter" id="image-counter">1 / 3</div>
+
+        <a href="index.html" class="back-button">BACK TO HOME</a>
+
+    </main>
+
+    <audio id="image-sound" src="./hover.mp3" preload="auto"></audio>
+
+    <script>
+        const images = [
+            {
+                src: "./creator1.png",
+                title: "Who Am I?",
+                description: "A brief summary of the kind of person I am, the surface of my goals, and what I like to do for fun."
+            },
+            {
+                src: "./creator2.png",
+                title: "The Hobby that Changed Life",
+                description: "Nothing beats opening the box of a fresh new figure, to me, it's just as good as a new car. It teaches me that even the little things can bring you joy."
+            },
+            {
+                src: "./creator3.png",
+                title: "A Deep-Dive into my hobbies and Interests",
+                description: "Here is a pretty short list of the things I like. Although cut short, I believe it was for the better since if I had kept going on these three pages would end up being 15 or so, and nobody wants to read about how much I love shelf organization (P.S: I don't.)"
+            }
+        ];
+
+        let currentImage = 0;
+
+        function changeImage(direction) {
+            const image = document.getElementById("gallery-image");
+
+            image.classList.add("changing");
+
+                const imageSound = document.getElementById("image-sound");
+
+    imageSound.currentTime = 0;
+    imageSound.play().catch(error => {
+        console.log("Sound couldn't play:", error);
+    });
+
+            setTimeout(() => {
+                currentImage += direction;
+
+                if (currentImage >= images.length) {
+                    currentImage = 0;
+                }
+
+                if (currentImage < 0) {
+                    currentImage = images.length - 1;
+                }
+
+                image.src = images[currentImage].src;
+
+                document.getElementById("image-title").textContent = images[currentImage].title;
+                document.getElementById("image-description").textContent = images[currentImage].description;
+                document.getElementById("image-counter").textContent = `${currentImage + 1} / ${images.length}`;
+
+                image.classList.remove("changing");
+            }, 250);
+        }
+    </script>
+
+</body>
+</html>
