@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Portfolio</title>
+
+    <link rel="stylesheet" href="./style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div id="enter-overlay" class="enter-overlay">
+    <p>CLICK ANYWHERE TO ENTER</p>
+</div>
+
+<audio id="bg-music" src="./CI.mp3" loop preload="auto"></audio>
+
+<audio id="enter-sfx" src="./enter.mp3" preload="auto"></audio>
+
+<video class="video-background" autoplay muted loop playsinline>
+    <source src="./background2.mp4" type="video/mp4">
+</video>
+
+    <main class="menu">
+        <div class="menu-content">
+
+            <h1 class="menu-title">MY ICT PORTFOLIO</h1>
+<p class="menu-subtitle">Each page is an acitivty styled surrounding one of my special interests, Games, Shows, and Characters!</p>
+
+            <nav class="menu-links">
+
+                <a href="skills_test.html" class="menu-button" id="elementchecker">ELEMENT CHECKER</a>
+
+                <a href="club.html" class="menu-button" id="ethanclub">CLUB MEMBERSHIP</a>
+
+                <a href="creator.html" class="menu-button">THE CREATOR</a>
+            </nav>
+
+        </div>
+    </main>
+
+ <audio id="hover-sound" src="./hover.mp3" preload="auto"></audio>
+
+    <script>
+        const hoverSound = document.getElementById("hover-sound");
+
+        document.querySelectorAll(".menu-button").forEach(button => {
+            button.addEventListener("mouseenter", () => {
+                hoverSound.currentTime = 0;
+
+                hoverSound.play().catch(error => {
+                    console.log("Audio couldn't play:", error);
+                });
+            });
+        });
+    </script>
+
+    <script>
+    const enterOverlay = document.getElementById("enter-overlay");
+    const bgMusic = document.getElementById("bg-music");
+    const enterSfx = document.getElementById("enter-sfx");
+
+    let hasEntered = false;
+
+    function enterSite() {
+        if (hasEntered) return;
+        hasEntered = true;
+
+        enterSfx.currentTime = 0;
+        enterSfx.volume = 0.7;
+        enterSfx.play().catch(error => {
+            console.log("SFX couldn't play:", error);
+        });
+
+        bgMusic.volume = 0.5;
+        bgMusic.play().catch(error => {
+            console.log("Music couldn't play:", error);
+        });
+
+        enterOverlay.classList.add("hidden");
+
+        enterOverlay.removeEventListener("click", enterSite);
+        document.removeEventListener("keydown", enterSite);
+    }
+
+    enterOverlay.addEventListener("click", enterSite);
+    document.addEventListener("keydown", enterSite);
+
+    </script>
+
+    
+<script>
+    const clubButton = document.getElementById("ethanclub");
+    const elementButton = document.getElementById("elementchecker");
+    const creatorButton = document.querySelector('a[href="creator.html"]');
+    const clubSfx = document.getElementById("enter-sfx");
+    const flashOverlay = document.getElementById("enter-overlay");
+    const backgroundMusic = document.getElementById("bg-music");
+
+    function pageTransition(button) {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const startingVolume = backgroundMusic.volume;
+            const fadeDuration = 300;
+            const steps = 15;
+            let step = 0;
+
+            const fadeInterval = setInterval(() => {
+                step++;
+                backgroundMusic.volume = Math.max(0, startingVolume * (1 - step / steps));
+
+                if (step >= steps) {
+                    clearInterval(fadeInterval);
+                    backgroundMusic.pause();
+                    backgroundMusic.volume = startingVolume;
+                }
+            }, fadeDuration / steps);
+
+            clubSfx.currentTime = 0;
+            clubSfx.volume = 0.7;
+
+            clubSfx.play().catch(error => {
+                console.log("SFX couldn't play:", error);
+            });
+
+            flashOverlay.classList.remove("hidden", "flash-only", "page-transition");
+
+            void flashOverlay.offsetWidth;
+
+            flashOverlay.classList.add("page-transition");
+
+            setTimeout(() => {
+                window.location.href = button.href;
+            }, 1000);
+        });
+    }
+
+    pageTransition(clubButton);
+    pageTransition(elementButton);
+    pageTransition(creatorButton);
+</script>
+
+</body>
+</html>

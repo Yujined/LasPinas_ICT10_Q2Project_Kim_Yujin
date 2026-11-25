@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./skills_test.css">
+
+    <title>Element Checker</title>
+
+    <link rel="stylesheet" href="https://pyscript.net/releases/2026.7.3/core.css">
+    <script type="module" src="https://pyscript.net/releases/2026.7.3/core.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Roboto Condensed', sans-serif;
+            color: white;
+            background: #080808;
+            animation: club-fade-in 0.8s ease-out forwards;
+            isolation: isolate;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 35px 20px 10px;
+        }
+
+        header h1 {
+            font-size: clamp(32px, 5vw, 58px);
+            margin: 0 0 12px;
+            font-weight: 700;
+        }
+
+        header p {
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        main {
+            width: min(420px, calc(100% - 40px));
+            box-sizing: border-box;
+            margin: 45px auto;
+            padding: 30px 25px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: white;
+            color: #222;
+            font: inherit;
+            font-size: 16px;
+        }
+
+        input[type="text"]::placeholder {
+            color: #777;
+        }
+
+        input[type="button"] {
+            margin-top: 12px;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            background: white;
+            color: black;
+            font: inherit;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover {
+            background: #dcdcdc;
+        }
+
+        /* ELEMENT INFORMATION DISPLAY */
+        #result {
+            margin-top: 22px;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 25px;
+            color: white;
+            font-size: 16px;
+            text-decoration: none;
+            border-bottom: 1px solid white;
+            padding-bottom: 3px;
+            transition: opacity 0.2s ease;
+        }
+
+        .back-button:hover {
+            opacity: 0.65;
+        }
+    </style>
+</head>
+
+<div class="background-image"></div>
+
+<body>
+
+    <header>
+        <img src="./GL1.png" alt="Element Checker" class="header-logo">
+        <p>Lo and Behold, The Kaiju Dictionary! Enter the name of a popular Godzilla character and you will receive their movie of origin, date of creation, and relationship with our king, Godzilla!</p>
+    </header>
+
+    <main>
+        <h2>Kaiju Dictionary</h2>
+
+        <input
+            type="text"
+            id="element"
+            placeholder="Ex., Godzilla, Mothra, Rodan"
+        >
+
+        <input
+            type="button"
+            value="Check Element"
+            py-click="check_element"
+        >
+
+        <div id="result"></div>
+        <a href="./index.html" class="back-button">← BACK TO HOMEPAGE</a>
+    </main>
+
+    <script type="py" src="./skills_test.py"></script>
+
+</body>
+</html>
